@@ -8,6 +8,7 @@ use  App\Http\Controllers\Service\ServiceNameController;
 use App\Http\Controllers\Mentor\MentorController;
 use App\Http\Controllers\Mentee\MenteeController;
 use App\Http\Controllers\Booking\BookingInfoController;
+use App\Http\Controllers\StripePaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,12 @@ Route::post('update-mentee-information',[MenteeController::class,'updateMenteeIn
 
 // mentee
 Route::post('booking/mentor-booking',[BookingInfoController::class,'bookingAMentor']);
+
+
+
+//
+
+Route::get('customer/create', [StripePaymentController::class,'createCustomer']);
+Route::get('customer/empheralkey', [StripePaymentController::class,'createCustomerEmpheralKey']);
+Route::get('customer/make-payment', [StripePaymentController::class,'makeStripePaymentByCustomer']);
+Route::get('stripe', [StripePaymentController::class,'makeStripePaymentByCustomer']);
