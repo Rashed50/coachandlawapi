@@ -57,14 +57,12 @@ class BookingInfoController extends Controller
                  return response()->json(['success' => 'false', 'status_code' => '500', 'message' => $ex->getMessage()]);
             } 
         
-    } 
-    
-    
-
-
-
-
-
-    
+        } 
+  
     
 }
+
+ 
+ 
+ 
+ 

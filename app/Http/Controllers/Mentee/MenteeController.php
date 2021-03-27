@@ -23,7 +23,7 @@ class MenteeController extends Controller
      
       
             $uploadObj = new UploadController();
-            $proImgPath = $uploadObj->updateMenteeProfileImage($request);
+            $proImgPath = $uploadObj->uploadMenteeProfileImage($request);
             $cvPath = "";//  $uploadObj->uploadMentorCV($request);
        
             $amentee = new Mentee;

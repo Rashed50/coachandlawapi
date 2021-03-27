@@ -32,7 +32,7 @@ Route::get('service/get-services',[ServiceNameController::class,'getServiceNames
 
 // university
 Route::get('university/get-universities',[UniversityController::class,'getUnivesities']);
-
+Route::get('university/get-university/{id?}',[UniversityController::class,'getAUnivesity']);
 
  
 
@@ -54,7 +54,7 @@ Route::post('booking/mentor-booking',[BookingInfoController::class,'bookingAMent
 
 //
 
-Route::get('customer/create', [StripePaymentController::class,'createCustomer']);
-Route::get('customer/empheralkey', [StripePaymentController::class,'createCustomerEmpheralKey']);
-Route::get('customer/make-payment', [StripePaymentController::class,'makeStripePaymentByCustomer']);
-Route::get('stripe', [StripePaymentController::class,'makeStripePaymentByCustomer']);
+Route::post('customer/create', [StripePaymentController::class,'createCustomer']);
+Route::post('customer/empheralkey', [StripePaymentController::class,'createCustomerEmpheralKey']);
+Route::post('customer/make-payment', [StripePaymentController::class,'makeStripePaymentByCustomer']);
+//Route::get('stripe', [StripePaymentController::class,'makeStripePaymentByCustomer']);
