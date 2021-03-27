@@ -24,27 +24,27 @@ class BookingInfoController extends Controller
     
                 
           
-                $abooking = new BookingInfo;
+                $bbooking = new BookingInfo();
               
-                $abooking->bookingId =  $request->input('bookingId');
-                $abooking->mentorId = $request->input('mentorId');
+               // $abooking->bookingId =  $request->input('bookingId');
+                $bbooking->mentorId = $request->input('mentorId');
                 
-                $abooking->menteeId =  $request->input('menteeId');
+                $bbooking->menteeId =  $request->input('menteeId');
                 
-                $abooking->payAmount = $request->input('payAmount');
-                $abooking->agreementForm = "";// $request->input('agreementForm');
-                $abooking->transactionId = $request->input('transactionId');
+                $bbooking->payAmount = $request->input('payAmount');
+                $bbooking->agreementForm = "";// $request->input('agreementForm');
+                $bbooking->transactionId = $request->input('transactionId');
                 
                 
-                $abooking->bookingCode =  $this->createBookingCode();
+                $bbooking->bookingCode =  $this->createBookingCode();
             
                 //$request->input('bookingCode');
                //$code = UtilityHelper()->createBookingCode();
-               $result = $abooking->save();
+               $result = $bbooking->save();
                $mentor = new MentorController();
                if($result){ 
                     $mentor->updateMentorBookingInformation($request);
-                    $newBookingInfo = new BookingInfo;
+                    $newBookingInfo = new BookingInfo();
                     $newBookingInfo->all()->last();
                     return response()->json(['success' => 'true','data' => $newBookingInfo,'status_code' => '200']);
                 }else {

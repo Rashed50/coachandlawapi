@@ -85,7 +85,10 @@ class StripePaymentController extends Controller
             ["stripe_version" =>  '2020-08-27']
           );
 
-       // Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        
+       
+
+
         Stripe\Charge::create ([
                 "amount" => 100 * 100,
                 "currency" => "usd",

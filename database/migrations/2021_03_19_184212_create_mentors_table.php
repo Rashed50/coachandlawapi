@@ -23,11 +23,12 @@ class CreateMentorsTable extends Migration
             $table->string('profileDescription')->nullable();
             $table->string('mobileNo');
             $table->string('profilePhoto');
+            $table->string('password');
             $table->string('cvPath');
             $table->string('trainingForm');
             $table->string('countryCode');
             $table->string('address')->nullable();
-            $table->decimal('hiringPrice');
+            $table->integer('hiringPrice');
             $table->float('rating',3,1);
             $table->boolean('isAvailableToHire');
             $table->unsignedInteger('noOfHourFoMentee');

@@ -37,6 +37,7 @@ class MentorController extends Controller
         $amentor->cvPath =  $cvPath;// $request->input('cvPath');
         $amentor->trainingForm = $trainctFormPath; // $request->input('trainingForm');
         $amentor->rating = 0;
+      //  $amentor->password = $request->input('password');
         $amentor->countryCode = $request->input('countryCode');
         $amentor->address = $request->input('address');
         $amentor->hiringPrice = $request->input('hiringPrice');
@@ -50,7 +51,7 @@ class MentorController extends Controller
 
         $result = $amentor->save();
         $newMentor = new Mentor;
-            $newMentor->all()->last();
+        $newMentor = Mentor::latest()->first();
             if($result != null){
                 return response()->json(['success' => 'true','message' => $newMentor,'status_code' => '200']);
             }else {

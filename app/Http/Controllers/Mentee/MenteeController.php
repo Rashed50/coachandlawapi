@@ -23,7 +23,7 @@ class MenteeController extends Controller
      
       
             $uploadObj = new UploadController();
-            $proImgPath = $uploadObj->uploadMentorProfileImage($request);
+            $proImgPath = $uploadObj->updateMenteeProfileImage($request);
             $cvPath = "";//  $uploadObj->uploadMentorCV($request);
        
             $amentee = new Mentee;
@@ -43,7 +43,8 @@ class MenteeController extends Controller
     
             $result = $amentee->save();
              $newMentee = new Mentee;
-            $newMentee->all()->last();
+           // $newMentee->all()->last();
+            $newMentee = Mentee::latest()->first();
             if($result != null){
                 return response()->json(['success' => 'true','data' => $newMentee,'status_code' => '200']);
             }else {

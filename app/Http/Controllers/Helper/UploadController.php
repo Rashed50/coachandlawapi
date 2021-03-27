@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
-
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Throwable;
 
 class UploadController extends Controller
 {
@@ -18,13 +20,20 @@ class UploadController extends Controller
  */
 
     public function uploadMentorProfileImage(Request $request) {
+         
+      try { 
             if($request->hasFile('profilePhoto')) {
-            $file = $request->file('profilePhoto');
-	        $destinationPath = "uploads/profile_photo/mentors";
-            $fileName = rand(100000,999999).'.jpg';
-            $file->move($destinationPath,$fileName);
-            return $destinationPath.'/'.$fileName;
-		}
+                $file = $request->file('profilePhoto');
+	             $destinationPath = "uploads/profile_photo/mentors";
+                 $fileName = rand(100000,999999).'.jpg';
+                $file->move($destinationPath,$fileName);
+                 return $destinationPath.'/'.$fileName;
+            }
+         }
+         catch(Exception $ex){
+            return "12333.jpg";
+         }
+		
      }
 
      public function updateMentorProfileImage($request,$updateProductName) {
@@ -79,13 +88,18 @@ class UploadController extends Controller
 
 
 public function uploadMenteeProfileImage(Request $request) {
+   try { 
     if($request->hasFile('profilePhoto')) {
     $file = $request->file('profilePhoto');
     $destinationPath = "uploads/profile_photo/mentees";
     $fileName = rand(100000,999999).'.jpg';
     $file->move($destinationPath,$fileName);
     return $destinationPath.'/'.$fileName;
-}
+      }
+   }
+   catch(Exception $ex){
+      return "12333.jpg";
+   }
 }
 
 public function updateMenteeProfileImage($request,$updateProductName) {
