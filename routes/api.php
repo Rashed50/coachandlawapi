@@ -8,7 +8,8 @@ use  App\Http\Controllers\Service\ServiceNameController;
 use App\Http\Controllers\Mentor\MentorController;
 use App\Http\Controllers\Mentee\MenteeController;
 use App\Http\Controllers\Booking\BookingInfoController;
-use App\Http\Controllers\StripePaymentController;
+//use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\Payments\StripePaymentController;
 
 /*
 |--------------------------------------------------------------------------

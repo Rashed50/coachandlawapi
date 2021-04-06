@@ -5,6 +5,7 @@ namespace App\Http\Controllers\mentor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\UploadController;
+use App\Http\Controllers\Payments\StripePaymentController;
 use App\Models\Mentor\Mentor;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -37,7 +38,7 @@ class MentorController extends Controller
         $amentor->cvPath =  $cvPath;// $request->input('cvPath');
         $amentor->trainingForm = $trainctFormPath; // $request->input('trainingForm');
         $amentor->rating = 0;
-      //  $amentor->password = $request->input('password');
+        $amentor->password = $request->input('password');
         $amentor->countryCode = $request->input('countryCode');
         $amentor->address = $request->input('address');
         $amentor->hiringPrice = $request->input('hiringPrice');
@@ -48,6 +49,14 @@ class MentorController extends Controller
         $amentor->totalWithdraw = 0;// $request->input('totalWithdraw');
         $amentor->universityId = $request->input('universityId');
         $amentor->serviceId = $request->input('serviceId');
+
+        $stripeAccountObj = new StripePaymentController();
+        $stripeCustInfo = $stripeAccountObj->createCustomer($request);
+
+        if($stripeCustInfo){
+             $amentor->paymentUserAccountId = $stripeCustInfo->id;
+         } 
+
 
         $result = $amentor->save();
         $newMentor = new Mentor;
@@ -71,6 +80,14 @@ class MentorController extends Controller
     
     //  return "rashed";
       $mentorList = Mentor::get()->all();
+
+
+      $mentorList = DB::table('mentors')
+      ->join('universities',  'mentors.universityId', '=', 'universities.universityId' )
+      ->join('service_names',  'mentors.serviceId', '=', 'service_names.serviceNameId' )
+      ->get();
+
+
      
       if($mentorList != null){
           return response()->json(['success' => 'true','data' => $mentorList,'status_code' => '200']);

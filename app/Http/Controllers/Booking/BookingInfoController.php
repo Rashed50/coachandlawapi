@@ -24,28 +24,29 @@ class BookingInfoController extends Controller
     
                 
           
-                $bbooking = new BookingInfo();
+                $booking = new BookingInfo();
               
-               // $abooking->bookingId =  $request->input('bookingId');
-                $bbooking->mentorId = $request->input('mentorId');
+                $booking->mentorId = $request->input('mentorId');
                 
-                $bbooking->menteeId =  $request->input('menteeId');
+                $booking->menteeId =  $request->input('menteeId');
                 
-                $bbooking->payAmount = $request->input('payAmount');
-                $bbooking->agreementForm = "";// $request->input('agreementForm');
-                $bbooking->transactionId = $request->input('transactionId');
+                $booking->payAmount = $request->input('payAmount');
+                $booking->agreementForm = "";// $request->input('agreementForm');
+                $booking->transactionId = $request->input('transactionId');
+              //  return 'oooo';// $booking->mentorId;
                 
-                
-                $bbooking->bookingCode =  $this->createBookingCode();
+                $booking->bookingCode = $request->input('bookingCode');// $this->createBookingCode();
             
                 //$request->input('bookingCode');
                //$code = UtilityHelper()->createBookingCode();
-               $result = $bbooking->save();
-               $mentor = new MentorController();
+               $result = $booking->save();
+         
                if($result){ 
+
+                    $mentor = new MentorController();
                     $mentor->updateMentorBookingInformation($request);
                     $newBookingInfo = new BookingInfo();
-                    $newBookingInfo->all()->last();
+                    $newBookingInfo = BookingInfo::latest()->first();
                     return response()->json(['success' => 'true','data' => $newBookingInfo,'status_code' => '200']);
                 }else {
                     return response()->json(['success' => 'false','message' => 'data not saved','status_code' => '404']);

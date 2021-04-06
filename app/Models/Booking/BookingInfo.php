@@ -19,5 +19,7 @@ class BookingInfo extends Model
         'agreementForm',
     ];
 
-     
+    
+    
+   
 }

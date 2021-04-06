@@ -35,6 +35,7 @@ class CreateMentorsTable extends Migration
             $table->unsignedInteger('totalMentees');
             $table->float('totalEarn');
             $table->float('totalWithdraw');
+	        $table->string('paymentUserAccountId')->nullable();
             $table->integer('universityId');
             $table->integer('serviceId');
             $table->timestamps();
@@ -49,6 +50,7 @@ class CreateMentorsTable extends Migration
                 'email' => 'rashed@gmail.com',
                 'profileDescription' => 'I am administrative lawyer',
                 'mobileNo' => '01731540704',
+		        'password' => '123456',
                 'profilePhoto' => 'uploads/profile_photo/mentors/901245.jpg',
                 'cvPath' => 'uploads/cv/mentor/373903.pdf',
                 'trainingForm' => 'uploads/training_form/mentor/245377.pdf',
@@ -61,6 +63,7 @@ class CreateMentorsTable extends Migration
                 'totalMentees' => '0',
                 'totalEarn' => '0',
                 'totalWithdraw' => '0',
+		        'paymentUserAccountId' => '123456789',
                 'universityId' => '1',
                 'serviceId' => '1'
             )
@@ -74,8 +77,10 @@ class CreateMentorsTable extends Migration
                 'lastName' => 'Samuyel',
                 'email' => 'Samuyel@gmail.com',
                 'profileDescription' => 'I am VAT and TAX lawyer',
+
                 'mobileNo' => '+2383749384',
                 'profilePhoto' => 'uploads/profile_photo/mentors/901245.jpg',
+		        'password' => '123456',
                 'cvPath' => 'uploads/cv/mentor/373903.pdf',
                 'trainingForm' => 'uploads/training_form/mentor/245377.pdf',
                 'countryCode' => 'CAN',
@@ -87,6 +92,7 @@ class CreateMentorsTable extends Migration
                 'totalMentees' => '0',
                 'totalEarn' => '0',
                 'totalWithdraw' => '0',
+		        'paymentUserAccountId' => '123456789',
                 'universityId' => '3',
                 'serviceId' => '1'
             )
@@ -104,6 +110,7 @@ class CreateMentorsTable extends Migration
                 'profileDescription' => 'I am income tax lawyer',
                 'mobileNo' => '3849324832',
                 'profilePhoto' => 'uploads/profile_photo/mentors/901245.jpg',
+	        	'password' => '123456',
                 'cvPath' => 'uploads/cv/mentor/373903.pdf',
                 'trainingForm' => 'uploads/training_form/mentor/245377.pdf',
                 'countryCode' => 'UK',
@@ -115,6 +122,7 @@ class CreateMentorsTable extends Migration
                 'totalMentees' => '0',
                 'totalEarn' => '0',
                 'totalWithdraw' => '0',
+		        'paymentUserAccountId' => '123456789',
                 'universityId' => '2',
                 'serviceId' => '1'
             )

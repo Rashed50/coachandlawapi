@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Payments;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -21,11 +22,13 @@ class StripePaymentController extends Controller
     public function createCustomer(Request $request)
     {
         try{ 
+
+          
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
          $email =  $request->get('email'); //'rshedul@gmail.com'; 
-         $fullName = $request->get('name') ;//'rshedul'; //  $request->input('name'); 
-         $phone	=   $request->get('phone'); //'850348543' ;  
+         $fullName = $request->get('firstName') ;//'rshedul'; //  $request->input('name'); 
+         $phone	=   $request->get('mobileNo'); //'850348543' ;  
         
         $key = \Stripe\Customer::create([
           'description' => 'testing','email'=>$email,'phone'=>$phone, 'name'=>$fullName
@@ -36,14 +39,13 @@ class StripePaymentController extends Controller
            return $key ;// response()->json(['success' => 'true','data' => $empheralKey,'status_code' => '200']);
          }
           else {
-              return response()->json(['success' => 'false','message' => 'Error occured','status_code' => '404']);
+              return null;// response()->json(['success' => 'false','message' => 'Error occured','status_code' => '404']);
            }
         
-      return $empheralKey; //back();
       }
       catch (Exception $ex) {
           
-          return response()->json(['success' => 'false','message' => $ex,'status_code' => '500']);
+          return null; // response()->json(['success' => 'false','message' => $ex,'status_code' => '500']);
             
       }
      
@@ -72,7 +74,7 @@ class StripePaymentController extends Controller
           );
              
            if($empheralKey){ 
-  
+              $empheralKey['success'] = true;
               return $empheralKey ;
            }
             else {

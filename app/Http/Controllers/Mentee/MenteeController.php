@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mentee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\UploadController;
+use App\Http\Controllers\Payments\StripePaymentController;
 use App\Models\Mentee\Mentee;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -22,12 +23,13 @@ class MenteeController extends Controller
         try{
      
       
+
             $uploadObj = new UploadController();
-            $proImgPath = $uploadObj->uploadMenteeProfileImage($request);
+            $proImgPath =  $uploadObj->uploadMenteeProfileImage($request);
             $cvPath = "";//  $uploadObj->uploadMentorCV($request);
        
             $amentee = new Mentee;
-            $amentee->firstName =  $request->input('firstName');
+            $amentee->firstName = $request->input('firstName');
             $amentee->middleName = $request->input('middleName');
             $amentee->lastName =  $request->input('lastName');
             $amentee->email = $request->input('email');
@@ -40,12 +42,20 @@ class MenteeController extends Controller
             $amentee->address = $request->input('address');
             $amentee->universityId = $request->input('universityId');
             $amentee->serviceId = $request->input('serviceId');
-    
-            $result = $amentee->save();
+
+            $stripeAccountObj = new StripePaymentController();
+            $stripeCustInfo = $stripeAccountObj->createCustomer($request);
+
+            if($stripeCustInfo){
+                 $amentee->paymentUserAccountId = $stripeCustInfo->id;
+             } 
+ 
+
+             $result = $amentee->save();
              $newMentee = new Mentee;
-           // $newMentee->all()->last();
-            $newMentee = Mentee::latest()->first();
+             $newMentee = Mentee::latest()->first();
             if($result != null){
+          
                 return response()->json(['success' => 'true','data' => $newMentee,'status_code' => '200']);
             }else {
                 return response()->json(['success' => 'false','message' => 'data not saved','status_code' => '404']);

@@ -22,6 +22,7 @@ class Mentee extends Model
         'cvPath',
         'countryCode',
         'address',
+        'paymentUserAccountId',
         'universityId',
         'serviceId',
     ];
