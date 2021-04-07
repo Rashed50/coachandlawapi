@@ -48,9 +48,9 @@ Route::post('registration/mentee-signup',[MenteeController::class,'newMenteeRegi
 Route::post('update-mentee-information',[MenteeController::class,'updateMenteeInformation']);
 
 
-// mentee
+// booking info
 Route::post('booking/mentor-booking',[BookingInfoController::class,'bookingAMentor']);
-
+Route::get('booking/booking-list/{id?}',[BookingInfoController::class,'getMentorBookingList']);
 
 
 //
