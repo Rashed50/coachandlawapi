@@ -40,7 +40,7 @@ Route::get('university/get-university/{id?}',[UniversityController::class,'getAU
 // mentor
 Route::post('registration/mentor-signup',[MentorController::class,'newMentorRegistration']);
 Route::get('mentorinformation/get-mentors',[MentorController::class,'getAllMentorDetails']);
-Route::get('mentorinformation/get-mentor/{id?}',[MentorController::class,'getMentorDetails']);
+Route::get('mentorinformation/get-mentor/{id?}',[MentorController::class,'getMentorDetailsByEmail']);
 Route::post('update-mentor-information',[MentorController::class,'updateMentorInformation']);
 
 // mentee
