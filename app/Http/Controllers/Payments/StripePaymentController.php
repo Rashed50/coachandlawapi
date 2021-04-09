@@ -56,18 +56,8 @@ class StripePaymentController extends Controller
       // return 'ok';
         try{ 
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-
-        // $email =  $request->get('email'); //'rshedul@gmail.com'; 
-        // $fullName = $request->get('name') ;//'rshedul'; //  $request->input('name'); 
-        // $phone	=   $request->get('phone'); //'850348543' ;  
-        
-      
-        // $customerkey = \Stripe\Customer::create([
-        //   'description' => 'testing','email'=>$email,'phone'=>$phone, 'name'=>$fullName
-        // ]);
-        // return $customerkey;
-
-
+ 
+ 
         $empheralKey = \Stripe\EphemeralKey::create(
             ["customer" => $request->get('customer')],
             ["stripe_version" => $request->get('api_version')]
@@ -93,45 +83,38 @@ class StripePaymentController extends Controller
     public function makeStripePaymentByCustomer(Request $request)
     {
         try{ 
-
-
+ 
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        // $email = 'rshedul@gmail.com';//  $_POST['email'] ;
-        // $fullName = 'rshedul';// $_POST['name'];
-        // $phone	= '850348543' ; //$_POST['phone'];
+  /*       
+        $cardInfo = $request->get('card');
+       
+        $method = \Stripe\PaymentMethod::create([
+          'type' => 'card',
+          'card' => [
+            'number' => $cardInfo['number'],
+            'exp_month' => $cardInfo['exp_month'],
+            'exp_year' => $cardInfo['exp_year'],
+            'cvc' => $cardInfo['cvc'],
+          ],
+        ]);
         
-        // $customerkey = \Stripe\Customer::create([
-        //   'description' => 'testing','email'=>$email,'phone'=>$phone, 'name'=>$fullName
-        // ]);
-
-        // $empheralKey = \Stripe\EphemeralKey::create(
-        //     ["customer" => $customerkey->id],
-        //     ["stripe_version" =>  '2020-08-27']
-        //   );
-
-
-        // $email =  $request->get('email'); //'rshedul@gmail.com'; 
-        // $fullName = $request->get('name') ;//'rshedul'; //  $request->input('name'); 
-        // $phone	=   $request->get('phone'); //'850348543' ;  
-        
-        // $customerkey = \Stripe\Customer::create([
-        //   'description' => 'testing','email'=>$email,'phone'=>$phone, 'name'=>$fullName
-        // ]);
-
-        // $empheralKey = \Stripe\EphemeralKey::create(
-        //     ["customer" => $customerkey->id],
-        //     ["stripe_version" => $request->get('api_version')]
-        //   );
-
-
-
+      $intent =  \Stripe\PaymentIntent::create([
+            'payment_method_types' => ['card'],
+            'payment_method' => $method->id,
+            'amount' => $request->get('amount'),
+            'currency' => $request->get('currency'),
+//           'customer' => $request->get('customer'),
+        ]);
+ */
         $intent = \Stripe\PaymentIntent::create([
-          'amount' => $request->get('amount'), // $_POST['amount'],
-          'currency' => $request->get('currency'), // $_POST['currency'],
-          'customer' => $request->get('customer')
+         // 'payment_method' => $request->get('payment_method'),
+          'amount' => $request->get('amount'), 
+          'currency' => $request->get('currency'), 
+          'customer' => $request->get('customer'),
+          'payment_method_types' => ['card'],
          ]);
-         
+ 
          if($intent){
           return $intent;
          }else {
@@ -144,4 +127,8 @@ class StripePaymentController extends Controller
               
         }
     }
+
+
+
+
 }
