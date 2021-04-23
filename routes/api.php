@@ -57,5 +57,7 @@ Route::get('booking/booking-list/{id?}',[BookingInfoController::class,'getMentor
 
 Route::post('customer/create', [StripePaymentController::class,'createCustomer']);
 Route::post('customer/empheralkey', [StripePaymentController::class,'createCustomerEmpheralKey']);
-Route::post('customer/make-payment', [StripePaymentController::class,'makeStripePaymentByCustomer']);
+Route::post('customerpayment', [StripePaymentController::class,'makeStripePaymentByCustomer']);
 //Route::get('stripe', [StripePaymentController::class,'makeStripePaymentByCustomer']);
+
+ 

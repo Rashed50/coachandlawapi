@@ -11,7 +11,7 @@ use Throwable;
 use Illuminate\Support\Facades\Log;
 use Stripe;
 use Illuminate\Support\Facades\DB;
- 
+
  
 
 class StripePaymentController extends Controller
@@ -86,29 +86,30 @@ class StripePaymentController extends Controller
  
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-  /*       
-        $cardInfo = $request->get('card');
-       
-        $method = \Stripe\PaymentMethod::create([
-          'type' => 'card',
-          'card' => [
-            'number' => $cardInfo['number'],
-            'exp_month' => $cardInfo['exp_month'],
-            'exp_year' => $cardInfo['exp_year'],
-            'cvc' => $cardInfo['cvc'],
-          ],
-        ]);
+        $paymethod = $request->get('payment_method');
+        $amount = $request->get('amount');
+        $currency = $request->get('currency');
+        $customer = $request->get('customer');
         
-      $intent =  \Stripe\PaymentIntent::create([
-            'payment_method_types' => ['card'],
-            'payment_method' => $method->id,
-            'amount' => $request->get('amount'),
-            'currency' => $request->get('currency'),
-//           'customer' => $request->get('customer'),
-        ]);
- */
+        if($paymethod == null) {
+          return response()->json(['success' => 'false','message' =>'payment_method value is null' ,'status_code' => '404']);
+
+        }
+        else if($amount == null) {
+          return response()->json(['success' => 'false','message' =>'amount value is null' ,'status_code' => '404']);
+
+        }
+        else if($customer == null) {
+          return response()->json(['success' => 'false','message' =>'customer value is null' ,'status_code' => '404']);
+
+        }
+        else if($currency == null) {
+          return response()->json(['success' => 'false','message' =>'currency value is null' ,'status_code' => '404']);
+
+        }
+        
         $intent = \Stripe\PaymentIntent::create([
-         // 'payment_method' => $request->get('payment_method'),
+          'payment_method' => $request->get('payment_method'),
           'amount' => $request->get('amount'), 
           'currency' => $request->get('currency'), 
           'customer' => $request->get('customer'),
@@ -123,7 +124,7 @@ class StripePaymentController extends Controller
          } 
         }
         catch (Exception $ex) {
-          return response()->json(['success' => 'false','message' => $intent,'status_code' => '500']);
+          return response()->json(['success' => 'false','message' => $ex,'status_code' => '500']);
               
         }
     }
