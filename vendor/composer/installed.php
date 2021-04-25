@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '81a5fd3aa36785443a08bebb48dcd0f2e522bf37',
+    'reference' => '46783699c63c9d6e12370ca830c3880461482ae2',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -150,6 +150,15 @@
       array (
       ),
       'reference' => '6ecda5217bf048088b891f7403b262906be5a957',
+    ),
+    'firebase/php-jwt' => 
+    array (
+      'pretty_version' => 'v5.2.1',
+      'version' => '5.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f42c9110abe98dd6cfe9053c49bc86acc70b2d23',
     ),
     'fruitcake/laravel-cors' => 
     array (
@@ -445,7 +454,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '81a5fd3aa36785443a08bebb48dcd0f2e522bf37',
+      'reference' => '46783699c63c9d6e12370ca830c3880461482ae2',
     ),
     'laravel/sail' => 
     array (
@@ -781,6 +790,15 @@
       array (
       ),
       'reference' => 'a395af46999a12006213c0c8346c9445eb31640c',
+    ),
+    'pusher/pusher-push-notifications' => 
+    array (
+      'pretty_version' => '1.1.2',
+      'version' => '1.1.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c8926f956ba4f7e681b4261220efd77f008a131d',
     ),
     'ralouphie/getallheaders' => 
     array (

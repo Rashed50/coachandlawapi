@@ -10,6 +10,7 @@ use App\Http\Controllers\Mentee\MenteeController;
 use App\Http\Controllers\Booking\BookingInfoController;
 //use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\Payments\StripePaymentController;
+use App\Http\Controllers\Pusher\PusherNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,3 +62,6 @@ Route::post('customerpayment', [StripePaymentController::class,'makeStripePaymen
 //Route::get('stripe', [StripePaymentController::class,'makeStripePaymentByCustomer']);
 
  
+
+//
+Route::post('push-send', [PusherNotificationController::class,'sendPusherPushNotification']);
