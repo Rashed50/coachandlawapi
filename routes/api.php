@@ -10,7 +10,7 @@ use App\Http\Controllers\Mentee\MenteeController;
 use App\Http\Controllers\Booking\BookingInfoController;
 //use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\Payments\StripePaymentController;
-use App\Http\Controllers\Pusher\PusherNotificationController;
+use App\Http\Controllers\Pusher\PushNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +52,8 @@ Route::post('update-mentee-information',[MenteeController::class,'updateMenteeIn
 // booking info
 Route::post('booking/mentor-booking',[BookingInfoController::class,'bookingAMentor']);
 Route::get('booking/booking-list/{id?}',[BookingInfoController::class,'getMentorBookingList']);
+Route::get('booking/mentee-list/{id?}',[BookingInfoController::class,'getMyBookingMenteesList']);
+
 
 
 //
@@ -64,4 +66,5 @@ Route::post('customerpayment', [StripePaymentController::class,'makeStripePaymen
  
 
 //
-Route::post('push-send', [PusherNotificationController::class,'sendPusherPushNotification']);
+//Route::post('push-send', [PusherNotificationController::class,'sendPusherPushNotification']);
+Route::post('push-notification-send', [PusherNotificationController::class,'notifyUser']);

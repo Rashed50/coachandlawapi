@@ -66,6 +66,30 @@ class BookingInfoController extends Controller
 
 
 
+        function getMyBookingMenteesList($id = null){
+            try{
+            
+             
+              $menteeList = DB::table('booking_infos')
+              ->join('mentees',  'booking_infos.menteeId', '=', 'mentees.menteeId' )
+              ->where('booking_infos.mentorId', $id)
+			  //->where('booking_infos.mentorId', $id)
+              ->get();
+       
+             
+              if($menteeList != null){
+                  return response()->json(['success' => 'true','data' => $menteeList,'status_code' => '200']);
+              }else {
+                  return response()->json(['success' => 'false','message' => 'Mentee Information not found','status_code' => '404']);
+              }
+                  
+             } 
+             catch (ModelNotFoundException $ex) {
+                     return  response()->json(['success' => 'false', 'status_code' => '404', 'message' => 'Invalid:Model Not Found', 'error' => 'error']);
+             } catch (Exception $ex) {
+                     return response()->json(['success' => 'false', 'status_code' => '500', 'message' => $ex->getMessage()]);
+             }
+        }
 
 
         function getMentorBookingList($id = null){
@@ -73,8 +97,9 @@ class BookingInfoController extends Controller
             
              
               $menteeList = DB::table('booking_infos')
-              ->join('mentees',  'booking_infos.menteeId', '=', 'mentees.menteeId' )
-              //->where('booking_infos.mentorId', $id)
+              ->join('mentors',  'booking_infos.mentorId', '=', 'mentors.mentorId' )
+              ->where('booking_infos.menteeId', $id)
+			  //->where('booking_infos.mentorId', $id)
               ->get();
        
              
