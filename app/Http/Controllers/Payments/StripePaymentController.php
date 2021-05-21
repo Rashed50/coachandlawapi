@@ -127,9 +127,21 @@ class StripePaymentController extends Controller
           return response()->json(['success' => 'false','message' => $ex,'status_code' => '500']);
               
         }
+
     }
 
 
+
+    public function refundPayment(Request $request)
+    {
+        
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+          $re = \Stripe\Refund::create([
+            'payment_intent' => 'pi_1Ij5iyCq1UTEo5OCUAmYlAif',
+          ]);
+          return $re;
+         
+    }
 
 
 }

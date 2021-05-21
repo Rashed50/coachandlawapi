@@ -70,6 +70,29 @@ class MenteeController extends Controller
     }
 
 
+    function getMenteeDetailsByEmail($id = null){
+        try{
+            
+            //  return "rashed";
+              $menteeList = Mentee::where('email',$id)->first();
+            /*
+          $mentorList = DB::table('mentors')
+          ->join('universities',  'mentors.universityId', '=', 'universities.universityId' )
+          ->join('service_names',  'mentors.serviceId', '=', 'service_names.serviceNameId' )
+          ->get();
+             */
+              if($menteeList != null){
+                  return response()->json(['success' => 'true','data' => $menteeList,'status_code' => '200']);
+              }else {
+                  return response()->json(['success' => 'false','message' => 'Mentee Information not found','status_code' => '404']);
+              }
+                  
+             } catch (ModelNotFoundException $ex) {
+                     return  response()->json(['success' => 'false', 'status_code' => '404', 'message' => 'Invalid:Model Not Found', 'error' => 'error']);
+             } catch (Exception $ex) {
+                     return response()->json(['success' => 'false', 'status_code' => '500', 'message' => $ex->getMessage()]);
+             }
+        }
 
 
     function updateMenteeInformation(Request $request){

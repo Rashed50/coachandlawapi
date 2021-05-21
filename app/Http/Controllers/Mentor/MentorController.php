@@ -76,17 +76,16 @@ class MentorController extends Controller
 }
 
     function getAllMentorDetails(){
-    try{
+   
+        try{
     
-    //  return "rashed";
+   
       $mentorList = Mentor::get()->all();
-
 
       $mentorList = DB::table('mentors')
       ->join('universities',  'mentors.universityId', '=', 'universities.universityId' )
       ->join('service_names',  'mentors.serviceId', '=', 'service_names.serviceNameId' )
       ->get();
-
 
      
       if($mentorList != null){
@@ -101,13 +100,13 @@ class MentorController extends Controller
      } catch (Exception $ex) {
              return response()->json(['success' => 'false', 'status_code' => '500', 'message' => $ex->getMessage()]);
      }
-}
+
+    }
 
 
-    function getMentorDetailsByEmail($id = null){
+ function getMentorDetailsByEmail($id = null){
     try{
-        
-        //  return "rashed";
+    
           $mentorList = Mentor::where('email',$id)->first();
          
           if($mentorList != null){
@@ -116,9 +115,11 @@ class MentorController extends Controller
               return response()->json(['success' => 'false','message' => 'Mentor Information not found','status_code' => '404']);
           }
               
-         } catch (ModelNotFoundException $ex) {
+    } 
+         catch (ModelNotFoundException $ex) {
                  return  response()->json(['success' => 'false', 'status_code' => '404', 'message' => 'Invalid:Model Not Found', 'error' => 'error']);
-         } catch (Exception $ex) {
+         } 
+         catch (Exception $ex) {
                  return response()->json(['success' => 'false', 'status_code' => '500', 'message' => $ex->getMessage()]);
          }
     }
@@ -172,6 +173,32 @@ class MentorController extends Controller
             }
         
     }
+
+
+    function checkEmailIsAlreadyUsedInWholeSystem($id = null){
+        try{
+            if($id == null){
+                return response()->json(['success' => 'false','message' => 'Email is not valid','status_code' => '200']);
+            }
+
+			   if (DB::table('mentees')->where('email', $id)->exists()) {
+                     return response()->json(['success' => 'false','message' => 'Email is already used','status_code' => '200']);
+				}
+			
+			    if (DB::table('mentors')->where('email', $id)->exists()) {
+                     return response()->json(['success' => 'false','message' => 'Email is already used','status_code' => '200']);
+				}
+                return response()->json(['success' => 'true','data' => 'Email is not used','status_code' => '200']);
+
+                  
+        } 
+        catch (Exception $ex) {
+                     return response()->json(['success' => 'false', 'status_code' => '500', 'message' => $ex->getMessage()]);
+             }
+    }
+
+
+
 
 }
 

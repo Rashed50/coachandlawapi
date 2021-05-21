@@ -43,6 +43,9 @@ Route::post('registration/mentor-signup',[MentorController::class,'newMentorRegi
 Route::get('mentorinformation/get-mentors',[MentorController::class,'getAllMentorDetails']);
 Route::get('mentorinformation/get-mentor/{id?}',[MentorController::class,'getMentorDetailsByEmail']);
 Route::post('update-mentor-information',[MentorController::class,'updateMentorInformation']);
+Route::get('checksignupemail/{id?}',[MentorController::class,'checkEmailIsAlreadyUsedInWholeSystem']);
+
+
 
 // mentee
 Route::post('registration/mentee-signup',[MenteeController::class,'newMenteeRegistration']);
@@ -63,7 +66,8 @@ Route::post('customer/empheralkey', [StripePaymentController::class,'createCusto
 Route::post('customerpayment', [StripePaymentController::class,'makeStripePaymentByCustomer']);
 //Route::get('stripe', [StripePaymentController::class,'makeStripePaymentByCustomer']);
 
- 
+Route::post('stripe-create-payment-refund', [StripePaymentController::class,'refundPayment']);
+
 
 //
 //Route::post('push-send', [PusherNotificationController::class,'sendPusherPushNotification']);
