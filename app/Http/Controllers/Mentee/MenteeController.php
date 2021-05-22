@@ -26,7 +26,7 @@ class MenteeController extends Controller
 
             $uploadObj = new UploadController();
             $proImgPath =  $uploadObj->uploadMenteeProfileImage($request);
-            $cvPath = "";//  $uploadObj->uploadMentorCV($request);
+            $cvPath = $uploadObj->uploadMenteeCV($request);
        
             $amentee = new Mentee;
             $amentee->firstName = $request->input('firstName');
@@ -73,16 +73,16 @@ class MenteeController extends Controller
     function getMenteeDetailsByEmail($id = null){
         try{
             
-            //  return "rashed";
-              $menteeList = Mentee::where('email',$id)->first();
-            /*
-          $mentorList = DB::table('mentors')
-          ->join('universities',  'mentors.universityId', '=', 'universities.universityId' )
-          ->join('service_names',  'mentors.serviceId', '=', 'service_names.serviceNameId' )
-          ->get();
-             */
-              if($menteeList != null){
-                  return response()->json(['success' => 'true','data' => $menteeList,'status_code' => '200']);
+                 //  $amentee = Mentee::where('email',$id)->first();
+		 
+	              $amentee = DB::table('mentees')
+                 ->join('universities',  'mentees.universityId', '=', 'universities.universityId' )
+                 ->join('service_names',  'mentees.serviceId', '=', 'service_names.serviceNameId' )
+	             ->where('mentees.email',$id)
+                 ->first();
+
+              if($amentee != null){
+                  return response()->json(['success' => 'true','data' => $amentee,'status_code' => '200']);
               }else {
                   return response()->json(['success' => 'false','message' => 'Mentee Information not found','status_code' => '404']);
               }

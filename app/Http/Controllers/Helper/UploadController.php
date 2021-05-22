@@ -124,7 +124,7 @@ public function updateMenteeProfileImage($request,$updateProductName) {
 public function uploadMenteeCV(Request $request) {
 if($request->hasFile('cvPath')) {
 $file = $request->file('cvPath');
-$destinationPath = "uploads/cv/menteer";
+$destinationPath = "uploads/cv/mentee";
 $fileName = rand(100000,999999).'.pdf';
 $file->move($destinationPath,$fileName);
 return $destinationPath.'/'.$fileName;

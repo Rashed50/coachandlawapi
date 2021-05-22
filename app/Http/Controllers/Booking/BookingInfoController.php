@@ -68,13 +68,19 @@ class BookingInfoController extends Controller
 
         function getMyBookingMenteesList($id = null){
             try{
-            
-             
+               /*
               $menteeList = DB::table('booking_infos')
               ->join('mentees',  'booking_infos.menteeId', '=', 'mentees.menteeId' )
               ->where('booking_infos.mentorId', $id)
 			  //->where('booking_infos.mentorId', $id)
               ->get();
+				*/
+				 $menteeList = DB::table('booking_infos')
+                 ->join('mentees',  'booking_infos.menteeId', '=', 'mentees.menteeId' )
+                ->join('universities',  'mentees.universityId', '=', 'universities.universityId' )
+                ->join('service_names',  'mentees.serviceId', '=', 'service_names.serviceNameId' )
+                ->where('booking_infos.mentorId', $id)
+                ->get();
        
              
               if($menteeList != null){
@@ -96,11 +102,22 @@ class BookingInfoController extends Controller
             try{
             
              
-              $menteeList = DB::table('booking_infos')
+               /*
+                $mentorList = DB::table('booking_infos')
               ->join('mentors',  'booking_infos.mentorId', '=', 'mentors.mentorId' )
               ->where('booking_infos.menteeId', $id)
 			  //->where('booking_infos.mentorId', $id)
               ->get();
+			 */
+				
+			 
+              
+				 $mentorList = DB::table('booking_infos')
+                 ->join('mentors',  'booking_infos.mentorId', '=', 'mentors.mentorId' )
+				 ->join('universities',  'mentors.universityId', '=', 'universities.universityId' )
+                 ->join('service_names',  'mentors.serviceId', '=', 'service_names.serviceNameId' )
+	              ->where('booking_infos.menteeId', $id)
+                 ->get();
        
              
               if($menteeList != null){
