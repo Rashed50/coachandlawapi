@@ -33,15 +33,18 @@ class SMSController extends Controller{
     public function sendWebNotification(Request $request)
     {
         $url = 'https://fcm.googleapis.com/fcm/send';
-        $FcmToken = 'fu-Xk1C-80eDpBzmMRmxN0:APA91bEspAxQfUIiJVYwMjoYJ5mcTqwqk2tDe1T5xYgzACdNdH6OzNiaCoqsyAgzv8E9Y1ZGKgttcJ0C2WbwCg_m5HzbYk0wY7PRzaGk3C2x6s0NK0Wi4ElPhlU766V84XOcEuo2vzAW';// User::whereNotNull('device_key')->pluck('device_key')->all();
-          
-        $serverKey = 'AAAAdq_1w9g:APA91bEHPXRlDD9I-jLS7TU4zEYWIsk7MQG887UJvRSdrcQsxy00oDEvkIGJ39E0s01y5ySdDpZZa4t3Cq3grBbVIuc8T_t_LyY3rLzKs5rTHeOtP9GXLByht6riPzb-_LAX6J5Q75pq';
-  
+       // $FcmToken = 'fu-Xk1C-80eDpBzmMRmxN0:APA91bEspAxQfUIiJVYwMjoYJ5mcTqwqk2tDe1T5xYgzACdNdH6OzNiaCoqsyAgzv8E9Y1ZGKgttcJ0C2WbwCg_m5HzbYk0wY7PRzaGk3C2x6s0NK0Wi4ElPhlU766V84XOcEuo2vzAW';
+       // User::whereNotNull('device_key')->pluck('device_key')->all();
+       $FcmToken = $request->fcmtoken;
+       // $serverKey = 'AAAAdq_1w9g:APA91bEHPXRlDD9I-jLS7TU4zEYWIsk7MQG887UJvRSdrcQsxy00oDEvkIGJ39E0s01y5ySdDpZZa4t3Cq3grBbVIuc8T_t_LyY3rLzKs5rTHeOtP9GXLByht6riPzb-_LAX6J5Q75pq';
+        $serverKey = env('FCM_SERVER_KEY');
         $data = [
             "to" => $FcmToken,
             "notification" => [
                 "title" => $request->title,
-                "body" => $request->body,  
+                "body" => $request->body, 
+                "userName" => $request->userName,
+                "type" => $request->type,
             ]
         ];
         $encodedData = json_encode($data);
@@ -80,7 +83,7 @@ class SMSController extends Controller{
     }
   
 
-   public function send_notification_FCM() {
+public function send_notification_FCM() {
  
 //$notification_id, $title, $message, $id,$type
 

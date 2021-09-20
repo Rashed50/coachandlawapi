@@ -39,6 +39,8 @@ class MenteeController extends Controller
             $amentee->cvPath =  $cvPath; 
             $amentee->password = $request->input('password');
             $amentee->countryCode = $request->input('countryCode');
+            $amentee->devicePushRegToken = $request->input('devicePushRegToken');
+            
             $amentee->address = $request->input('address');
             $amentee->universityId = $request->input('universityId');
             $amentee->serviceId = $request->input('serviceId');

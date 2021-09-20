@@ -26,6 +26,7 @@ class CreateMenteesTable extends Migration
             $table->string('password');
             $table->string('cvPath')->nullable();
             $table->string('countryCode');
+            $table->string('devicePushRegToken');
             $table->string('address')->nullable();
 	        $table->string('paymentUserAccountId')->nullable();
             $table->integer('universityId');
@@ -47,6 +48,7 @@ class CreateMenteesTable extends Migration
                 'password' => '12345',
                 'cvPath' => 'uploads/cv/mentor/373903.pdf',
                 'countryCode' => 'USA',
+                'devicePushRegToken' => '',
                 'address' => 'loss angel',
 		        'paymentUserAccountId' => '1234567',
                 'universityId' => '1',
@@ -68,6 +70,7 @@ class CreateMenteesTable extends Migration
                 'password' => '12345',
                 'cvPath' => 'uploads/cv/mentor/373903.pdf',
                 'countryCode' => 'USA',
+                'devicePushRegToken' => '',
                 'address' => 'loss angel',
 	         	'paymentUserAccountId' => '1234567',
                 'universityId' => '2',
@@ -87,8 +90,9 @@ class CreateMenteesTable extends Migration
                 'password' => '12345',
                 'cvPath' => 'uploads/cv/mentor/373903.pdf',
                 'countryCode' => 'USA',
+                'devicePushRegToken' => '',
                 'address' => 'loss angel',
-		'paymentUserAccountId' => '1234567',
+		        'paymentUserAccountId' => '1234567',
                 'universityId' => '3',
                 'serviceId' => '1'
             )

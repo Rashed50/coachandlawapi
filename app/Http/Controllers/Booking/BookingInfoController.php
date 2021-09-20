@@ -134,7 +134,7 @@ class BookingInfoController extends Controller
              }
         }
   
-    
+  
 }
 
  

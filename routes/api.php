@@ -12,6 +12,8 @@ use App\Http\Controllers\Booking\BookingInfoController;
 use App\Http\Controllers\Payments\StripePaymentController;
 use App\Http\Controllers\Pusher\PushNotificationController;
 use App\Http\Controllers\Helper\SMSController;
+use App\Http\Controllers\Notifications\NotificationController;
+
 
 
 /*
@@ -75,5 +77,6 @@ Route::post('stripe-create-payment-refund', [StripePaymentController::class,'ref
 //Route::post('push-send', [PusherNotificationController::class,'sendPusherPushNotification']);
 //Route::post('push-notification-send', [PusherNotificationController::class,'notifyUser']);
 
-Route::post('push-notification-send', [SMSController::class,'sendWebNotification']);
- 
+// Route::post('push-notification-send', [SMSController::class,'sendWebNotification']);
+Route::post('push-notification-send', [NotificationController::class,'sendPushNotification']);
+

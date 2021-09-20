@@ -40,6 +40,7 @@ class MentorController extends Controller
         $amentor->rating = 0;
         $amentor->password = $request->input('password');
         $amentor->countryCode = $request->input('countryCode');
+        $amentor->devicePushRegToken = $request->input('devicePushRegToken');
         $amentor->address = $request->input('address');
         $amentor->hiringPrice = $request->input('hiringPrice');
         $amentor->isAvailableToHire = true; // $request->input('isAvailableToHire');

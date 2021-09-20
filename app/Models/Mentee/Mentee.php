@@ -21,6 +21,7 @@ class Mentee extends Model
         'password',
         'cvPath',
         'countryCode',
+        'devicePushRegToken',
         'address',
         'paymentUserAccountId',
         'universityId',

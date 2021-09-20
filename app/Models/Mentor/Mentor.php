@@ -23,6 +23,7 @@ class Mentor extends Model
         'cvPath',
         'trainingForm',
         'countryCode',
+        'devicePushRegToken',
         'address',
         'hiringPrice',
         'rating',

@@ -27,6 +27,7 @@ class CreateMentorsTable extends Migration
             $table->string('cvPath');
             $table->string('trainingForm');
             $table->string('countryCode');
+            $table->string('devicePushRegToken');
             $table->string('address')->nullable();
             $table->integer('hiringPrice');
             $table->float('rating',3,1);
@@ -55,6 +56,7 @@ class CreateMentorsTable extends Migration
                 'cvPath' => 'uploads/cv/mentor/373903.pdf',
                 'trainingForm' => 'uploads/training_form/mentor/245377.pdf',
                 'countryCode' => 'USA',
+                'devicePushRegToken' => '',
                 'address' => 'loss angel',
                 'hiringPrice' => '40',
                 'rating' => '3.5',
@@ -84,6 +86,7 @@ class CreateMentorsTable extends Migration
                 'cvPath' => 'uploads/cv/mentor/373903.pdf',
                 'trainingForm' => 'uploads/training_form/mentor/245377.pdf',
                 'countryCode' => 'CAN',
+                'devicePushRegToken' => '',
                 'address' => ' ',
                 'hiringPrice' => '55',
                 'rating' => '2.5',
@@ -114,6 +117,7 @@ class CreateMentorsTable extends Migration
                 'cvPath' => 'uploads/cv/mentor/373903.pdf',
                 'trainingForm' => 'uploads/training_form/mentor/245377.pdf',
                 'countryCode' => 'UK',
+                'devicePushRegToken' => '',
                 'address' => 'london',
                 'hiringPrice' => '35',
                 'rating' => '4.5',
